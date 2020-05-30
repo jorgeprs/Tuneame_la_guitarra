@@ -893,10 +893,8 @@ limI2 = str2double(get(handles.edit4,'String'));
 limS2 = str2double(get(handles.edit5,'String'));
 
 Fs = getFs();
-datamic = getP1();
-% limI = 80;
-% limS = 500;
-% stop = 50;
+datamic = getDataMic();
+
 if(External_sound == 1 && stop < 82)
 limI = 82;
 limS = 330;
@@ -933,8 +931,7 @@ signal = filter(SR,datamic);
 axes(handles.axes2);
 % plot(f2,A2.*500, 'k');
 plot(f2,A2, 'k');
-title("Filtered Magnitude Spectrum"); xlim(getXInterval());
-% ylim(getYInterval());
+title("Filtered Magnitude Spectrum"); xlim(getXInterval()); ylim(getYInterval());
 % ylim([0 max(A2)]);
 xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on;
 
