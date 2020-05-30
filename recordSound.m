@@ -2,10 +2,10 @@ function [time_vector, recordedAudio] = recordSound(Fs, duration, nBits)
 
 % Obtaining Audio
 mic = audiorecorder(Fs,nBits,1);
-disp('RECORDING');
+% disp('RECORDING');
 record(mic, duration);
 pause(duration);
-disp('RECORDING DONE');
+% disp('RECORDING DONE');
 
 recordedAudio = getaudiodata(mic);
 % sound(recordedAudio, Fs);
