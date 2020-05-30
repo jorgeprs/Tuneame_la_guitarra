@@ -22,7 +22,7 @@ function varargout = interfaz(varargin)
 
 % Edit the above text to modify the response to help interfaz
 
-% Last Modified by GUIDE v2.5 29-May-2020 02:48:55
+% Last Modified by GUIDE v2.5 29-May-2020 20:47:22
 
 % Begin initialization code - DO NOT EDIT
 
@@ -284,7 +284,7 @@ global DCentsArray3
 DCentsArray3 = array;
 end
 
-% BLOQUE DE CÃ“DIGO DE HARDCODEO DE CHABELO
+% BLOQUE DE CÃƒâ€œDIGO DE HARDCODEO DE CHABELO
 function setgcurve1()
 global gcurve1
 gcurve1 = 1.*(getDCentsArray1())./getDCentsArray1();
@@ -383,7 +383,7 @@ function r = getinBetween3()
 global inBetween3
 r = inBetween3;
 end
-% BLOQUE DE CÃ“DIGO DE HARDCODEO DE CHABELO
+% BLOQUE DE CÃƒâ€œDIGO DE HARDCODEO DE CHABELO
 
 function r = getmaxFValue()
 global maxFValue
@@ -604,7 +604,7 @@ function recordButton_Callback(hObject, eventdata, handles)
 % Variables Globales
 Fs = getFs();
 nBits = getnBits(); 
-setRecordingTime(get(handles.slider2,'Value')); %correcciÃ³n de bug de inicio
+setRecordingTime(get(handles.slider2,'Value')); %correcciÃƒÂ³n de bug de inicio
 recordingtime = getRecordingTime();
 tunning_frequency = getTunning_frequency();
 set(hObject,'String', '3');
@@ -627,7 +627,7 @@ setP1(P1);
 
 
 P1t = P1;
-% ARMÓNICO DEFINITIVO
+% ARMÃ“NICO DEFINITIVO
 fIndex1 = find(P1t == max(P1t));
 if fIndex1 > 10
     P1t(fIndex1-10:fIndex1+10) = [0];
@@ -676,7 +676,7 @@ fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
 title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
+legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
 
@@ -730,7 +730,7 @@ fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
 title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
+legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
 end
@@ -759,7 +759,7 @@ fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
 title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
+legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
 end
@@ -788,7 +788,7 @@ fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
 title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
+legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
 end
@@ -816,7 +816,7 @@ fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
 title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
+legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
 end
@@ -845,7 +845,7 @@ fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
 title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
+legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
 end
@@ -893,10 +893,8 @@ limI2 = str2double(get(handles.edit4,'String'));
 limS2 = str2double(get(handles.edit5,'String'));
 
 Fs = getFs();
-datamic = getP1();
-% limI = 80;
-% limS = 500;
-% stop = 50;
+datamic = getDataMic();
+
 if(External_sound == 1 && stop < 82)
 limI = 82;
 limS = 330;
@@ -933,8 +931,7 @@ signal = filter(SR,datamic);
 axes(handles.axes2);
 % plot(f2,A2.*500, 'k');
 plot(f2,A2, 'k');
-title("Filtered Magnitude Spectrum"); xlim(getXInterval());
-% ylim(getYInterval());
+title("Filtered Magnitude Spectrum"); xlim(getXInterval()); ylim(getYInterval());
 % ylim([0 max(A2)]);
 xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on;
 
@@ -1049,6 +1046,16 @@ global maxF2Value
 maxF2Value = value;
 end
 
+function r = getynorm()
+global ynorm
+r = ynorm;
+end
+
+function setynorm(value)
+global ynorm
+ynorm = value;
+end
+
 % --- Executes on button press in pushbutton15.
 function pushbutton15_Callback(hObject, eventdata, handles)
 Fs = getFs();
@@ -1078,7 +1085,7 @@ setF2(f2);
 setP2(P2);
 
 P2t = P2;
-% ARMÃ“NICO DEFINITIVO
+% ARMÃƒâ€œNICO DEFINITIVO
 fIndex1 = find(P2t == max(P2t));
 if fIndex1 > 10
     P2t(fIndex1-10:fIndex1+10) = [0];
@@ -1112,15 +1119,44 @@ maxFValue= getmaxFValue();
 set(handles.text29,'String',(maxFValue-maxF2Value));
 set(handles.text31,'String',(maxF2Value));
 
+
+%% plotear sobre una distribuciÃ³n binomial
+selected_string = get(handles.popupmenu1,'value');
+switch selected_string
+    case 1
+        Stddev= 1.18;    
+    case 2
+        Stddev= 1.15;
+    case 3
+        Stddev= 1.19;
+    case 4
+        Stddev= 1.25;
+    case 5
+        Stddev= 0.99;
+    case 6
+        Stddev= 1.18;
+    otherwise
+        Stddev= 1.18;  
+end
+%la frecuencia ideal serÃ¡ la media
+munorm= getTunning_frequency();
+%la funciÃ³n normal estarÃ¡ dada por: 
+dvector= 0:length(P2);
+ynorm =1*normpdf(dvector,munorm ,Stddev);
+setynorm(ynorm);
+%%
 axes(handles.axes2);
 hold off;
-plot(f2, P2);  
+plot(f2, P2, 'k');
+hold on; 
+plot( ynorm, 'm');
 title("New sound Frequency"); 
-xlabel("f [Hz]"); 
-ylabel("A"); 
-grid on; 
-xlim([0 2*10^3]);
-
+xlabel("f [Hz]"); ylabel("A"); 
+grid on;
+xlim(getXInterval()); ylim(getYInterval());
+% xlim([0 2000]);
+% %  xlim auto
+% ylim auto
 end
 
 
@@ -1130,23 +1166,40 @@ axes(handles.axes2);
 hold off;
 f2= getF2();
 f1= getF();
+
+maxlen = max(length(f1), length(f2));
+f1 = [zeros(1,maxlen - length(f1)), f1];
+f2 = [zeros(1,maxlen - length(f2)), f2];
 rr =cov(f1,f2);
 l1= 'The covariance measures the correlation between the first sample and the second one';
 l2= 'First we obtain the Covariance of the two received signals:';
-lol= fprintf('%3.5f', rr);
-l3=[ 'The covariance is: ' lol '  ' ];
-l4= 'Multiplying either X or Y by a large number will increase the covariance so we need';
-l5= 'to normalize the covariance to measure the correlation in an absolute scale';
 
+l3=[ 'The covariance is: ' sprintf('%3.2f', rr) '  ' ];
+l4= 'Multiplying either X or Y by a large number will increase the covariance so we need to normalize the covariance to measure the correlation in an absolute scale';
 l7= 'The correlation coefficient is a number that is at most 1 in magnitude';
 dum= xcorr(f1,f2);
-lol3= fprintf(':  %1.18f', max(dum,[],'all') );
+% lol3= fprintf(':  %1.2f', max(dum,[],'all') );
 
-l8= 'The correlation coefficient is graphed on the second AXES';
-uiwait(msgbox({l1; l2; l3; l4; l5; l7; l8} ,'Random processes !'));
-plot (dum);
+l8= 'The correlation will be graphed on the second AXES';
+uiwait(msgbox({l1; l2; l3; l4; l7; l8} ,'Random processes !'));
+plot (dum, 'k');
 title("Correlation of the two recorded signals"); 
 xlabel("n"); ylabel("A"); grid on; 
 xlim auto
 ylim auto
+end
+
+
+% --- Executes on button press in pushbutton18.
+function pushbutton18_Callback(hObject, eventdata, handles)
+f2 = getF2(); P2 = getP2(); ynorm=getynorm();
+axes(handles.axes2);
+hold off;
+plot(f2, P2./max(P2),'k');
+hold on; 
+plot(ynorm,'m');
+title("New sound Frequency"); 
+xlabel("f [Hz]"); ylabel("A"); 
+grid on;
+xlim(getXInterval()); ylim(getYInterval());
 end

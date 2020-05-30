@@ -7,7 +7,7 @@ function varargout = interfaz(varargin)
 %      the existing singleton*.
 %
 %      INTERFAZ('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in INTERFAZ.M with the given input arguments.
+%      function named CALLB ACK in INTERFAZ.M with the given input arguments.
 %
 %      INTERFAZ('Property','Value',...) creates a new INTERFAZ or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
@@ -22,7 +22,7 @@ function varargout = interfaz(varargin)
 
 % Edit the above text to modify the response to help interfaz
 
-% Last Modified by GUIDE v2.5 29-May-2020 00:35:15
+% Last Modified by GUIDE v2.5 29-May-2020 02:48:55
 
 % Begin initialization code - DO NOT EDIT
 
@@ -473,6 +473,10 @@ imshow(imread('george.jpg'));
 title("Tune - up a Musician!");
 xlabel('In memory of our dear George'); ylabel('"With every mistake we must surely be learning".');
 
+axes(handles.axes5);
+imshow(imread('monty.jpg'));
+ylabel("Well Done Guys!!");
+
 end
 % --- Outputs from this function are returned to the command line.
 function varargout = interfaz_OutputFcn(hObject, eventdata, handles) 
@@ -621,12 +625,9 @@ set(hObject,'String', 'Start Recording');
 setF(f);
 setP1(P1);
 
-% [f2, P2] = fftSound(Fs, sin(2*pi*tunning_frequency*t));
-% setf2(f2);
-% setP2(P2);
 
 P1t = P1;
-% ARMÃ“NICO DEFINITIVO
+% ARMÓNICO DEFINITIVO
 fIndex1 = find(P1t == max(P1t));
 if fIndex1 > 10
     P1t(fIndex1-10:fIndex1+10) = [0];
@@ -674,21 +675,18 @@ f = getinBetween3();
 fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
-title("Audio's Amplitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
+title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
+legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
 
 distance = 1200*log2(getTunning_frequency()/getmaxFValue());
 % Note Frequency
-format bank
-disp(getTunning_frequency());
-
 set(handles.text9,'String', sprintf('%3.2f',getTunning_frequency()));
 % Played String Frequency
 set(handles.text12,'String', sprintf('%3.2f',getmaxFValue()));
 % Distance in cents
-set(handles.text21,'String', distance);
+set(handles.text21,'String', sprintf('%3.0f',distance()));
 if distance > 0
 set(handles.text24,'String', 'UP');
 elseif distance < 0
@@ -731,8 +729,8 @@ f = getinBetween3();
 fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
-title("Audio's Amplitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
+title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
+legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
 end
@@ -760,8 +758,8 @@ f = getinBetween3();
 fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
-title("Audio's Amplitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
+title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
+legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
 end
@@ -789,12 +787,79 @@ f = getinBetween3();
 fill(e, f, 'red', 'FaceAlpha', 0.1);
 fill(c, d, 'yellow', 'FaceAlpha', 0.3);
 fill(a, b, 'green', 'FaceAlpha', 0.3);
-title("Audio's Amplitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
-legend(': Spectrum',  ': Cent Â±30', sprintf(': Cent Â±%d',getCentsRange2()), sprintf(': Cent Â±%d',getCentsRange1()));
+title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
+legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
 xlim(getXInterval()); ylim(getYInterval());
 hold off
+end
+% --- Executes on button press in audibleRangeButton.
+function audibleRangeButton_Callback(hObject, eventdata, handles)
+setXInterval([20 20*10^3]);
+positiveRanges = getPositiveRanges();
+negativeRanges = getNegativeRanges();
+color = colorSelector(getmaxFValue(),getPositiveRanges(),getNegativeRanges());
+axes(handles.axes1);
+plot(getF(), getP1(),color);  
+hold on; xline(negativeRanges(3), 'r','LineWidth', 2);
+hold on; xline(negativeRanges(2), 'y', 'LineWidth', 2);
+hold on; xline(negativeRanges(1), 'g', 'LineWidth', 2);
+hold on; xline(positiveRanges(1), 'g', 'LineWidth', 2);
+hold on; xline(positiveRanges(2), 'y', 'LineWidth', 2);
+hold on; xline(positiveRanges(3), 'r', 'LineWidth', 2);
+a = getDCAR();
+b = getinBetween1();
+c = getDCAR2();
+d = getinBetween2();
+e = getDCAR3();
+f = getinBetween3();
+fill(e, f, 'red', 'FaceAlpha', 0.1);
+fill(c, d, 'yellow', 'FaceAlpha', 0.3);
+fill(a, b, 'green', 'FaceAlpha', 0.3);
+title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
+legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
+xlim(getXInterval()); ylim(getYInterval());
+hold off
+end
 
+% --- Executes on button press in automatic.
+function automaticButton_Callback(hObject, eventdata, handles)
+setXInterval([0 2*10^3]); setYInterval([0 max(getP1())]);
+positiveRanges = getPositiveRanges();
+negativeRanges = getNegativeRanges();
+color = colorSelector(getmaxFValue(),getPositiveRanges(),getNegativeRanges());
+axes(handles.axes1);
+plot(getF(), getP1(),color);  
+hold on; xline(negativeRanges(3), 'r','LineWidth', 2);
+hold on; xline(negativeRanges(2), 'y', 'LineWidth', 2);
+hold on; xline(negativeRanges(1), 'g', 'LineWidth', 2);
+hold on; xline(positiveRanges(1), 'g', 'LineWidth', 2);
+hold on; xline(positiveRanges(2), 'y', 'LineWidth', 2);
+hold on; xline(positiveRanges(3), 'r', 'LineWidth', 2);
+a = getDCAR();
+b = getinBetween1();
+c = getDCAR2();
+d = getinBetween2();
+e = getDCAR3();
+f = getinBetween3();
+fill(e, f, 'red', 'FaceAlpha', 0.1);
+fill(c, d, 'yellow', 'FaceAlpha', 0.3);
+fill(a, b, 'green', 'FaceAlpha', 0.3);
+title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
+legend(': Spectrum',  ': Cent ±30', sprintf(': Cent ±%d',getCentsRange2()), sprintf(': Cent ±%d',getCentsRange1()));
+xlim(getXInterval()); ylim(getYInterval());
+hold off
+end
 
+% --- Executes on button press in cleanButton.
+function cleanButton_Callback(hObject, eventdata, handles)
+positiveRanges = getPositiveRanges();
+negativeRanges = getNegativeRanges();
+color = colorSelector(getmaxFValue(),getPositiveRanges(),getNegativeRanges());
+axes(handles.axes1);
+plot(zeros(length(getF()),1), zeros(length(getP1()),1),color);  
+title("Audio's Magnitude Spectrum"); xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on; 
+xlim(getXInterval()); ylim(getYInterval());
+hold off
 end
 %% FILTERS configuration %%
 % --- Executes on button press in EXTERNAL SOUNDS.
@@ -817,72 +882,58 @@ end
 
 % --- Executes on button press in applyFilters.
 function applyFilters_Callback(hObject, eventdata, handles)
-% hObject    handle to applyFilters (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-f=getF();
-Fs=getFs();
-signal=getP1();
-original=getP1();
-
 External_sound = get(handles.externalSounds,'value');
 Audible_range = get(handles.audibleRange,'value');
 Specific_range = get(handles.specificRange,'value');
 Specific_range2 = get(handles.specificRange2,'value');
+stop = str2double(get(handles.edit7,'String'));
+limI = str2double(get(handles.edit1,'String'));
+limS = str2double(get(handles.edit3,'String'));
+limI2 = str2double(get(handles.edit4,'String'));
+limS2 = str2double(get(handles.edit5,'String'));
 
-%recordedAudio = bandpass(getaudiodata(mic),[80 350],Fs,'ImpulseResponse','iir','Steepness',0.95);
+Fs = getFs();
+datamic = getDataMic();
 
-%Guitar frequencies -> 82.4 to 329.63
-
-if(External_sound == 1)
-    
-[band, DF]=bandpass(signal,[2 80], 1000, 'ImpulseResponse', 'fir');
-[signal, DF]=highpass(signal,350, 1000, 'ImpulseResponse', 'fir');
-
-signal=signal+band;
-
+if(External_sound == 1 && stop < 82)
+limI = 82;
+limS = 330;
+SR = Filter_Band(limI-stop,limI,limS,limS+stop,Fs);
+elseif(External_sound == 1)
+limI = 82;
+limS = 330;
+SR = Filter_Band(1,limI,limS,limS+stop,Fs); 
 end 
-
-
-if(Audible_range == 1)
-    
-[signal, DF]=highpass(signal,20, 1000, 'ImpulseResponse', 'fir','Steepness', 0.95);
-
+if(Audible_range == 1 && stop < 20)
+limI = 20;
+limS = 20*10^3;
+SR = Filter_Band(limI-stop,limI,limS,limS+stop,Fs);
+elseif(Audible_range == 1)
+limI = 20;
+limS = 20*10^3;
+SR = Filter_Band(1,limI,limS,limS+stop,Fs); 
+end 
+if(Specific_range == 1 && limI > stop)
+SR = Filter_Band(limI - stop,limI,limS,limS + stop,Fs); 
+elseif(Specific_range == 1)
+SR = Filter_Band(1,limI,limS,limS + stop,Fs);    
 end
     
-  
-if(Specific_range == 1)
-    
-F1=get(handles.edit1,'String');
-F2=get(handles.edit3,'String');
-
-f1=str2double(F1);
-f2=str2double(F2);
- 
-[signal, DF] = bandpass(signal,[f1 f2], 1250, 'Steepness', 0.95, 'ImpulseResponse', 'fir');
-
-end
-    
-if(Specific_range2 == 1)
-    
-F3=get(handles.edit4,'String');
-F4=get(handles.edit5,'String');
-
-f3=str2double(F3);
-f4=str2double(F4);
-    
-[signal, DF]=bandpass(signal,[f3 f4], 1250, 'Steepness', 0.95, 'ImpulseResponse', 'fir');
-
+if(Specific_range2 == 1 && limI2 > stop)
+    SR = Filter_Band(limI2 - stop,limI2,limS2,limS2 + stop,Fs); 
+elseif(Specific_range2 == 1)
+    SR = Filter_Band(limI2 - stop,limI2,limS2,limS2 + stop,Fs); 
 end 
+
+signal = filter(SR,datamic);
+[f2, A2] = fftSound(Fs, signal);
 
 axes(handles.axes2);
-plot(f,signal, 'k');
-title("Filtered Amplitude Spectrum");
-xlim(getXInterval()); ylim(getYInterval());
-xlabel("f [Hz]"); 
-ylabel("|Y(f)|"); 
-grid on;
+% plot(f2,A2.*500, 'k');
+plot(f2,A2, 'k');
+title("Filtered Magnitude Spectrum"); xlim(getXInterval()); ylim(getYInterval());
+% ylim([0 max(A2)]);
+xlabel("f [Hz]"); ylabel("|Y(f)|"); grid on;
 
 end
 function edit1_Callback(hObject, eventdata, handles)
@@ -892,6 +943,8 @@ end
 function edit4_Callback(hObject, eventdata, handles)
 end
 function edit5_Callback(hObject, eventdata, handles)
+end
+function edit7_Callback(hObject, eventdata, handles)
 end
 % --- Executes during object creation, after setting all properties.
 function edit1_CreateFcn(hObject, eventdata, handles)
@@ -918,7 +971,12 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 end
-
+% --- Executes during object creation, after setting all properties.
+function edit7_CreateFcn(hObject, eventdata, handles)
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+end
 %% OPTIONS %%
 % --------------------------------------------------------------------
 function Project_Callback(hObject, eventdata, handles)
@@ -1051,18 +1109,73 @@ maxFValue= getmaxFValue();
 set(handles.text29,'String',(maxFValue-maxF2Value));
 set(handles.text31,'String',(maxF2Value));
 
+
+%% plotear sobre una distribución binomial
+selected_string = get(hObject,'value');
+switch selected_string
+    case 1
+        setTunning_frequency(E4);
+        setDCentsArray1(([327.7315, 329.0008333, 330.2701667, 331.5395]));
+        setDCentsArray2(([325.8439, 326.9319286, 328.0199571, 329.1079857, 330.1960143, 331.2840429, 332.3720714, 333.4601]));
+        setDCentsArray3(([323.9672, 335.3918]));
+        setAmplitude(5);                      
+    case 2
+        setTunning_frequency(B3);
+        setDCentsArray1(([245.5177, 246.9441, 248.3705]));
+        setDCentsArray2(([244.1037, 245.24482, 246.38594, 247.52706, 248.66818, 249.8093]));
+        setDCentsArray3(([242.6977, 251.2564]));
+        setAmplitude(5);
+    case 3
+        setTunning_frequency(G3);
+        setDCentsArray1(([194.8711, 196.00325, 197.1354]));
+        setDCentsArray2(([193.7487, 194.880875, 196.01305, 197.145225, 198.2774]));
+        setDCentsArray3(([192.6328, 199.426]));
+        setAmplitude(10);
+    case 4
+        setTunning_frequency(D3);     
+        setDCentsArray1(([145.9843, 147.6806]));
+        setDCentsArray2(([145.1435, 146.2743667, 147.4052333, 148.5361]));
+        setDCentsArray3(([144.3075, 149.3965]));
+        setAmplitude(10);
+    case 5
+        setTunning_frequency(A2);    
+        setDCentsArray1(([109.3664, 110.6372]));
+        setDCentsArray2(([108.7365, 110.0073, 111.2781]));
+        setDCentsArray3(([108.1103, 111.9228]));
+        setAmplitude(20);
+    case 6
+        setTunning_frequency(E2)       
+        setDCentsArray1(([81.9354, 82.8874]));
+        setDCentsArray2(([81.4634, 83.3676]));
+        setDCentsArray3(([80.9942, 83.8505]));
+        setAmplitude(20);
+    otherwise
+      
+end
+    
+Stddev= 
+
+
+%la frecuencia ideal será la media
+munorm= getTunning_frequency();
+%la función normal estará dada por: 
+dvector= 0:length(P2);
+ynorm =10*normpdf(dvector,munorm ,500);
+
+%%
 axes(handles.axes2);
 hold off;
-plot(f2, P2);  
+plot(f2, P2);
+hold on; 
+plot( ynorm);
 title("New sound Frequency"); 
 xlabel("f [Hz]"); 
 ylabel("A"); 
-grid on; 
-xlim([0 2*10^3]);
+grid on;
 
-
-
-
+xlim([0 2000]);
+%  xlim auto
+ylim auto
 end
 
 
@@ -1072,21 +1185,25 @@ axes(handles.axes2);
 hold off;
 f2= getF2();
 f1= getF();
+
+maxlen = max(length(f1), length(f2));
+f1 = [zeros(1,maxlen - length(f1)), f1];
+f2 = [zeros(1,maxlen - length(f2)), f2];
 rr =cov(f1,f2);
 l1= 'The covariance measures the correlation between the first sample and the second one';
 l2= 'First we obtain the Covariance of the two received signals:';
-% l3=[ 'The covariance is: ' int2str(rr) '  ' ];
-% l4= 'Multiplying either X or Y by a large number will increase the covariance so we need';
-% l5= 'to normalize the covariance to measure the correlation in an absolute scale';
-% 
-% l6= ['Normalized covariance: ' normalize(rr)];
-msgbox(l1;l2}, 'Random process Analysis');
+lol= fprintf('%3.5f', rr);
+l3=[ 'The covariance is: ' lol '  ' ];
+l4= 'Multiplying either X or Y by a large number will increase the covariance so we need to normalize the covariance to measure the correlation in an absolute scale';
+l7= 'The correlation coefficient is a number that is at most 1 in magnitude';
+dum= xcorr(f1,f2);
+lol3= fprintf(':  %1.18f', max(dum,[],'all') );
 
-plot (rr);
-title("New sound Frequency"); 
-xlabel("n"); 
-ylabel("A"); 
-grid on; 
+l8= 'The correlation coefficient will be graphed on the second AXES';
+uiwait(msgbox({l1; l2; l3; l4; l7; l8} ,'Random processes !'));
+plot (dum);
+title("Correlation of the two recorded signals"); 
+xlabel("n"); ylabel("A"); grid on; 
 xlim auto
 ylim auto
 end
